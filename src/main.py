@@ -1,36 +1,35 @@
 from scraper_service import run_scrape
 
-def search():
-    search_query = input("Search query: ")
-    city = input("City: ")
-    max_results = int(input("Max results: "))
-    output_path = input("Output path (e.g. results.csv): ")
-    append = input("Append to existing file? (y/n): ").lower() == "y"
+search_type = input("Select an option:\n 1. Basic search\n 2. No website search\n>> ")
+if search_type != "1" and search_type != "2":
+    print("Invalid option.")
+    exit()
+query = input("Search query: ")
+if query == "":
+    print("Search query cannot be empty.")
+    exit()
+location = input("Location: ")
+if location == "":
+    print("Location cannot be empty.")
+    exit()
+max_results = int(input("Max results: "))
+if max_results <= 0:
+    print("Max results must be greater than 0.")
+    exit()
+    
+print("Running search...")
 
+def search(query=None, location=None, max_results=None, website_search=False):
     run_scrape(
-        search_query=search_query,
-        city=city,
+        search_query=query,
+        city=location,
         max_results=max_results,
-        output_path=output_path,
-        append = True if append else False
+        output_path='results.csv',
+        append=True,
+        website_search=website_search,
     )
 
-def batch_search():
-    max_results = 200
-    output_path = "export.csv"
-    append = True
-    cities = ["Calais", "Boulogne-sur-Mer", "Dunkerque", "Amiens", "Creil"]
-    queries = ["restaurant"]
-
-    for city in cities:
-        for query in queries:
-            run_scrape(
-                search_query=query,
-                city=city,
-                max_results=max_results,
-                output_path=output_path,
-                append = True if append else False
-            )
-            
-if __name__ == "__main__":
-    batch_search()
+if search_type == "1":
+    search(query=query, location=location, max_results=max_results, website_search=False)
+elif search_type == "2":
+    search(query=query, location=location, max_results=max_results, website_search=True)

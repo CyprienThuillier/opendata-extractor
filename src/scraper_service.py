@@ -11,12 +11,13 @@ def run_scrape(
     on_result=None,
     existing_urls: set = None,
     append: bool = False,
+    website_search: bool = False,
 ):
     return asyncio.run(
-        _run_async(search_query, city, max_results, output_path, on_result, existing_urls or set(), append)
+        _run_async(search_query, city, max_results, output_path, on_result, existing_urls or set(), append, website_search)
     )
 
-async def _run_async(search_query, city, max_results, output_path, on_result, existing_urls, append):
+async def _run_async(search_query, city, max_results, output_path, on_result, existing_urls, append, website_search):
     from playwright.async_api import async_playwright
     import asyncio as aio
 
@@ -65,8 +66,10 @@ async def _run_async(search_query, city, max_results, output_path, on_result, ex
 
       tasks = [analyze(browser, url, 3, sem, search_query) for url in new_urls]
       results = await aio.gather(*tasks)
-      # valid = [r for r in results if r is not None] # All results
-      valid = [r for r in results if r is not None and not r.get("website")] # No website results
+      if not website_search:
+        valid = [r for r in results if r is not None]
+      else:
+        valid = [r for r in results if r is not None and not r.get("website")]
 
       export_file(valid, filename=output_path, append=append)
       if on_result:
