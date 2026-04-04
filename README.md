@@ -11,7 +11,7 @@ This project is an automated Python script designed to extract public data (Open
 ## 🛡️ Educational Purpose
 This script was built as a proof of concept (PoC) to understand dynamic DOM manipulation, anti-bot mechanisms, and robust data extraction. It strictly extracts publicly available information.
 
-## 🚀 Usage (Development only)
+## 🚀 How to use
 #### 1. Installation
 ```bash
 git clone https://github.com/CyprienThuillier/opendata-extractor.git
@@ -20,11 +20,6 @@ pip install -r requirements.txt
 playwright install chromium
 ```
 #### 2. Usage
-```bash
-python src/main.py -q="restaurant" -l="London" -m=150 -w -o="output.csv" -a
-```
-
-#### Parser
 ```bash
 usage: main.py [-h] --query QUERY --location LOCATION --max-results MAX_RESULTS [--website-search] [--output OUTPUT] [--append]
 
@@ -41,3 +36,8 @@ options:
   --output, -o OUTPUT   Output file path
   --append, -a          Append to existing file
 ```
+#### Example : 
+```bash
+python src/main.py -q="restaurant" -l="London" -m=150 -w -o="output.csv" -a
+```
+This command extracts **150 restaurants** in **London** with **no website** and **appends** it in **output.csv**
