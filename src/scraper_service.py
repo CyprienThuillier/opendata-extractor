@@ -62,7 +62,7 @@ async def _run_async(search_query, city, max_results, output_path, on_result, ex
       await page.close()
 
       new_urls = list(all_urls)[:max_results]
-      print(f"[Scraper] Collected {len(new_urls)} new URLs")
+      print(f"[-] Collected {len(new_urls)} new URLs")
 
       tasks = [analyze(browser, url, 3, sem, search_query) for url in new_urls]
       results = await aio.gather(*tasks)
@@ -80,5 +80,5 @@ async def _run_async(search_query, city, max_results, output_path, on_result, ex
       await browser.close()
 
     elapsed = int(time.time()) - init_time
-    print(f"Done in {elapsed // 60:02d}m{elapsed % 60:02d}s — {len(all_results)} results")
+    print(f"-> Process finished in {elapsed // 60:02d}m{elapsed % 60:02d}s — {len(all_results)} results")
     return all_results
