@@ -16,15 +16,12 @@ This script was built as a proof of concept (PoC) to understand dynamic DOM mani
 ```bash
 git clone https://github.com/CyprienThuillier/opendata-extractor.git
 cd opendata-extractor
-pip install -r requirements.txt
-playwright install chromium
+./install.sh
 ```
 #### 2. Usage
 ```bash
 python src/main.py -q="restaurant" -l="London" -m=150 -w -o="output.csv" -a
 ```
-
-#### Parser
 ```bash
 usage: main.py [-h] --query QUERY --location LOCATION --max-results MAX_RESULTS [--website-search] [--output OUTPUT] [--append]
 
