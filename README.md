@@ -20,9 +20,6 @@ cd opendata-extractor
 ```
 #### 2. Usage
 ```bash
-python src/main.py -q="restaurant" -l="London" -m=150 -w -o="output.csv" -a
-```
-```bash
 usage: main.py [-h] --query QUERY --location LOCATION --max-results MAX_RESULTS [--website-search] [--output OUTPUT] [--append]
 
 Scrape search results
