@@ -36,8 +36,3 @@ options:
   --output, -o OUTPUT   Output file path
   --append, -a          Append to existing file
 ```
-#### Example : 
-```bash
-python src/main.py -q="restaurant" -l="London" -m=150 -w -o="output.csv" -a
-```
-This command extracts **150 restaurants** in **London** with **no website** and **appends** it in **output.csv**
